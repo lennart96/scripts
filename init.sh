@@ -14,7 +14,7 @@ fi
 
 cd scripts
 
-source shrc
+source $(pwd)shrc
 
 if bin_exists pacman ; then
     sudo pacman -S $(cat packages) --needed
