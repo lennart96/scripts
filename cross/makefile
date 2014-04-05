@@ -28,11 +28,11 @@ src-gcc: gcc.tar.bz2
 	tar xvjf gcc.tar.bz2 -C src-gcc
 
 binutils: dirs src-binutils
-	cd build-binutils; ../src-binutils/configure $(CONF)
+	cd build-binutils; ../src-binutils/*/configure $(CONF)
 	$(MAKE) -j4 -C build-binutils
 
 gcc: binutils dirs src-gcc
-	cd build-gcc; ../src-gcc/configure $(CONF) $(CONFGCC)
+	cd build-gcc; ../src-gcc/*/configure $(CONF) $(CONFGCC)
 	$(MAKE) -j4 -C build-gcc all-gcc
 	$(MAKE) -j4 -C build-gcc all-target-libgcc
 
