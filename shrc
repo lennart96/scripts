@@ -1,0 +1,59 @@
+
+unset SSH_ASKPASS
+
+export BROWSER=$(which xdg-open)
+export EDITOR=$(which nano)
+export PATH=$HOME/prefix/bin:$PATH
+
+function bin_exists () {
+    type $1 > /dev/null 2>&1 || return 1
+    return 0
+}
+
+if bin_exists pacman; then
+    alias update='pacman -Syu'
+    alias install='pacman -S'
+    alias search='pacman -Ss'
+
+    function binaries () {
+        pacman -Ql $1 | grep /usr/bin | awk '{print $2}' | cut -d'/' -f4
+    }
+fi
+
+if bin_exists notify-send; then
+    alias alert="notify-send '$(ps -p $$ --no-headers -o comm,pid)'"
+fi
+
+# human-friendly
+alias free='free -m'
+alias cp='cp -i'
+alias df='df -h'
+
+export HISTSIZE=2000
+
+if [ -n "$ZSH_VERSION" ]; then
+
+    # zsh
+    zstyle ':completion:*' completer _expand _complete _ignore _correct _approximate
+    zstyle :compinstall filename $HOME/.zshrc
+
+    autoload -Uz compinit
+    compinit
+
+    HISTFILE=$HOME/.zsh_history
+    SAVEHIST=2000
+
+    setopt autocd
+    bindkey -e
+
+    prompt off
+    PS1='%d '
+
+elif [ -n "$BASH_VERSION" ]; then
+
+    # bash
+    PS1='\W\$ '
+
+    EC () { echo -e ' -> '$?; }
+    trap EC ERR
+fi
