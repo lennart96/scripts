@@ -34,7 +34,7 @@ count=$#
 cores=$(nproc)
 
 let div=count/cores || true
-let rem="count-cores*div" || true
+let rem=count-cores*div || true
 
 start=1
 
@@ -48,7 +48,7 @@ do
         $cmd "${@:$start:$length}"
         result=$?
         [ $result -eq 0 ] && $verbose && echo " -> task $i done"
-      ! [ $result -eq 0 ] && $verbose &&echo " -> task $i errorcode $result"
+      ! [ $result -eq 0 ] && $verbose && echo " -> task $i errorcode $result"
     } &
 
     (( start += length))
