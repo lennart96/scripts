@@ -10,8 +10,8 @@ function bin_exists () {
 }
 
 if bin_exists pacman; then
-    alias update='pacman -Syu'
-    alias install='pacman -S'
+    alias update='sudo pacman -Syu'
+    alias install='sudo pacman -S'
     alias search='pacman -Ss'
 
     function binaries () {
