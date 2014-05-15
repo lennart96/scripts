@@ -1,0 +1,11 @@
+{
+	"_filename:" : ".config/sublime-text*/Packages/User/Make Run.sublime-build",
+	"cmd": ["make"],
+
+	"variants" : [
+		{
+			"cmd" : ["make", "run"],
+			"name" : "Run"
+		}
+	]
+}
