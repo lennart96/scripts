@@ -1,7 +1,7 @@
 unset SSH_ASKPASS
 
 export BROWSER=$(which xdg-open)
-export EDITOR=$(which vim)
+export EDITOR=vim
 export PATH=$HOME/prefix/bin:$PATH
 
 function bin_exists () {
