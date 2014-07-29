@@ -3,6 +3,9 @@ unset SSH_ASKPASS
 export BROWSER=$(which xdg-open)
 export EDITOR=vim
 export PATH=$HOME/prefix/bin:$PATH
+export PATH=$HOME/android-sdk/platform-tools:$PATH
+export PATH=$HOME/android-sdk/tools:$PATH
+export PATH=$PATH:$HOME/.cabal/bin 
 
 function bin_exists () {
     type $1 > /dev/null 2>&1 || return 1
@@ -23,10 +26,18 @@ if bin_exists notify-send; then
     alias alert="notify-send '$(ps -p $$ --no-headers -o comm,pid)'"
 fi
 
+# vim in shell
+
+alias ':e'='vim'
+alias ':q'='exit'
+
 # human-friendly
 alias free='free -m'
 alias cp='cp -i'
 alias df='df -h'
+
+alias ipynb='ipython notebook'
+alias ipy="ipython -i -c 'cd Dropbox/ipython' --pylab --no-banner --no-confirm-exit --classic --autocall=1"
 
 export HISTSIZE=2000
 
