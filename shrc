@@ -14,12 +14,16 @@ function bin_exists () {
 
 if bin_exists pacman; then
     alias update='sudo pacman -Syu'
-    alias install='sudo pacman -Syu && sudo pacman -Syu && sudo pacman -S --needed'
+    alias install='sudo pacman -Syu && sudo pacman -S --needed'
     alias search='pacman -Ss'
 
     function binaries () {
         pacman -Ql $1 | grep /usr/bin | awk '{print $2}' | cut -d'/' -f4
     }
+elif bin_exists apt-get; then
+    alias update='sudo apt-get update'
+    alias install='sudo apt-get install'
+    alias search='apt-cache search'
 fi
 
 if bin_exists notify-send; then
