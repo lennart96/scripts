@@ -1,0 +1,50 @@
+{
+	"color_scheme": "Packages/Color Scheme - Default/Pastels on Dark.tmTheme",
+    "font_size": 10,
+    "word_separators": "./\\()\"':,.;<>~!@#$%^&*|+=[]{}`~?",
+    "line_numbers": false,
+    "rulers": [72, 78, 80],
+    "spell_check": true,
+    "tab_size": 4,
+    "use_tab_stops": true,
+    "detect_indentation": true,
+    "auto_indent": true,
+    "smart_indent": true,
+    "trim_automatic_white_space": false,
+    "indent_subsequent_lines": true,
+    
+    "caret_style": "solid",
+    "caret_extra_top": 2,
+    "caret_extra_bottom": 2,
+    
+    "line_padding_bottom": 1,
+    "scroll_past_end": true,
+    
+    "move_to_limit_on_up_down": true,
+    
+    "draw_white_space": "selection",
+    "draw_indent_guides": true,
+    
+    "ensure_newline_at_eof_on_save": true,
+    "save_on_focus_lost": true,
+    
+    "default_encoding": "UTF-8",
+    
+    "auto_complete_delay": 0,
+    
+    "auto_complete_selector": "source - comment, meta.tag - punctuation.definition.tag.begin",
+    "auto_complete_commit_on_tab": true,
+    
+    "auto_complete_with_fields": true,
+    "copy_with_empty_selection": false,
+    "auto_find_in_selection": true,
+    
+    "drag_text": false,
+    
+    "scroll_speed": 3.0,
+    "highlight_modified_tabs": true,
+    
+    "always_prompt_for_file_reload": true,
+    
+    "show_full_path": false,
+}

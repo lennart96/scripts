@@ -28,8 +28,10 @@ fi
 
 # vim in shell
 
-alias ':e'='vim'
-alias ':q'='exit'
+alias q=clear
+alias :e=$EDITOR
+alias :q=exit
+alias :t=file
 
 # human-friendly
 alias free='free -m'
@@ -39,7 +41,7 @@ alias df='df -h'
 alias ipynb='ipython notebook'
 alias ipy="ipython -i -c 'cd Dropbox/ipython' --pylab --no-banner --no-confirm-exit --classic --autocall=1"
 
-export HISTSIZE=2000
+export HISTSIZE=20000
 
 if [ -n "$ZSH_VERSION" ]; then
 
@@ -62,6 +64,7 @@ if [ -n "$ZSH_VERSION" ]; then
 
     PS1='%(?.. -> %? 
 )%~$ '
+    TIMEFMT='%J  -- %E (%U+%S %Mkb %c+%w)'
 
 elif [ -n "$BASH_VERSION" ]; then
 
