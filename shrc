@@ -12,6 +12,10 @@ function bin_exists () {
     return 0
 }
 
+if bin_exists docker; then
+    alias d=docker
+fi
+
 if bin_exists pacman; then
     alias update='sudo pacman -Syu'
     alias install='sudo pacman -Syu && sudo pacman -S --needed'
