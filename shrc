@@ -14,6 +14,7 @@ function bin_exists () {
 
 if bin_exists docker; then
     alias d=docker
+    alias dps='docker ps -a'
 fi
 
 if bin_exists pacman; then
