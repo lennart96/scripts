@@ -5,7 +5,8 @@ export EDITOR=vim
 export PATH=$HOME/prefix/bin:$PATH
 export PATH=$HOME/android-sdk/platform-tools:$PATH
 export PATH=$HOME/android-sdk/tools:$PATH
-export PATH=$PATH:$HOME/.cabal/bin 
+export PATH=$PATH:$HOME/.cabal/bin:/opt/clean/bin 
+export PATH=$PATH:"/home/lennart/anaconda3/bin"
 
 function bin_exists () {
     type $1 > /dev/null 2>&1 || return 1
@@ -38,9 +39,14 @@ fi
 # vim in shell
 
 alias q=clear
-alias :e=$EDITOR
+alias :e="$EDITOR"
 alias :q=exit
 alias :t=file
+alias :m="$EDITOR Makefile"
+alias :r="make clean; make run"
+alias e=:e
+alias m=make
+alias mr='clear;:r'
 
 # human-friendly
 alias free='free -m'
