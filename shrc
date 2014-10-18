@@ -30,6 +30,9 @@ elif bin_exists apt-get; then
     alias update='sudo apt-get update'
     alias install='sudo apt-get install'
     alias search='apt-cache search'
+elif bin_exists pkg; then
+    alias install='sudo pkg install'
+    alias search='pkg search'
 fi
 
 if bin_exists notify-send; then
