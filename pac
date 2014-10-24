@@ -5,8 +5,6 @@ swi-prolog
 nodejs
 base-devel
 cabal-install
-happy
-haddock
 goldendict
 meld
 strace
@@ -22,6 +20,8 @@ inkscape
 wmctrl
 python-numpy
 qemu
+skype
+ocaml
 python2-numpy
 python2-matplotlib
 python-matplotlib
@@ -37,7 +37,6 @@ bluez-utils
 wol
 hexedit
 vimpager
-bcrypt
 r
 pacaur
 inotify-tools
