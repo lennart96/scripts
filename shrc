@@ -78,7 +78,7 @@ if [ -n "$ZSH_VERSION" ]; then
     bindkey -e
 
     PS1='%(?.. -> %? 
-)%~$ '
+)%2~ '
     TIMEFMT='%J  -- %E (%U+%S %Mkb %c+%w)'
 
 elif [ -n "$BASH_VERSION" ]; then
