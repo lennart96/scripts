@@ -16,4 +16,4 @@ done
 sudo pacman -S --needed --noconfirm zsh
 sudo chsh -s /usr/bin/zsh lennart
 sudo pacman -S --needed --noconfirm $(cat pac)
-pacaur -S -a --noconfirm --noedit --insecure $(cat aur)
+pacaur -S -a --needed --noconfirm --noedit --insecure $(cat aur)

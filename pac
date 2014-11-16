@@ -2,14 +2,13 @@ youtube-dl
 cloc
 glib2-docs
 swi-prolog
-nodejs
-base-devel
 cabal-install
 goldendict
 meld
 strace
 ddrescue
 smartmontools
+nodejs
 transmission-qt
 tree
 acpid

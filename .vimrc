@@ -31,12 +31,10 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-nnoremap ii <Esc>
-vnoremap ii <esc>gv
-onoremap ii <Esc>
-inoremap ii <Esc>`^
-
-" nnoremap <Esc> ZZ
+nnoremap qq <Esc>
+vnoremap qq <Esc>gv
+onoremap qq <Esc>
+inoremap qq <Esc>`^
 
 set hidden
 set visualbell
@@ -46,13 +44,17 @@ set timeoutlen=200 ttimeoutlen=0
 nnoremap <Tab> >>
 nnoremap <S-Tab> <<
 
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
+
 noremap <C-k> <C-w>k
 noremap <C-j> <C-w>j
 noremap <C-h> <C-w>h
 noremap <C-l> <C-w>l
+inoremap <C-w> <Esc>:w<CR>a
 
-vmap Q gq
-nmap Q gqap
+vmap Z gq
+nmap Z gqap
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
@@ -78,6 +80,8 @@ if has("autocmd")
   autocmd FileType text setlocal textwidth=72
   autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
   autocmd FileType haskell set omnifunc=necoghc#omnifunc
+  autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
+  autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 
   autocmd BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
@@ -121,3 +125,5 @@ if has("gui_running")
 else
     inoremap <Nul> <C-x><C-o>
 endif
+
+" nnoremap <Esc> ZZ

@@ -51,6 +51,8 @@ alias e=:e
 alias m=make
 alias mr='clear;:r'
 
+alias ls='ls --time-style=+"%Y-%m-%d %H:%M" --group-directories-first'
+
 # human-friendly
 alias free='free -m'
 alias cp='cp -i'
