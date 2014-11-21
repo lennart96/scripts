@@ -1,0 +1,9 @@
+import System.IO.Unsafe (unsafePerformIO)
+import Control.Concurrent
+import Control.Monad
+import Control.Applicative
+import Data.Functor
+
+:set prompt "→ "
+
+:def hoogle \str -> return $ ":! hoogle --count 20 \"" ++ str ++ "\""
