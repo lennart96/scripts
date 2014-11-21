@@ -1,0 +1,26 @@
+background no
+    font Terminus 12
+
+    gap_x 5
+    gap_y 5
+
+    own_window yes
+    own_window_transparent yes
+    own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+    own_window_type normal
+
+    double_buffer yes
+    update_interval 1
+    total_run_times 0
+
+    draw_shades no
+    draw_borders no
+    draw_outline no
+
+    alignment top_right
+
+    TEXT
+    ${acpitemp}C\
+    $memperc%\
+    ${fs_free /} root ${fs_free /home} home\
+    kernel $kernel
