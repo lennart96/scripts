@@ -1,8 +1,9 @@
 background no
-    font Terminus 12
+    use_xft yes
+    xftfont Terminus:size=12
 
-    gap_x 5
-    gap_y 5
+    gap_x 8
+    gap_y 4
 
     own_window yes
     own_window_transparent yes
@@ -17,10 +18,14 @@ background no
     draw_borders no
     draw_outline no
 
-    alignment top_right
+    # size 24 512
+
+    alignment bottom_left
 
     TEXT
-    ${acpitemp}C\
-    $memperc%\
-    ${fs_free /} root ${fs_free /home} home\
-    kernel $kernel
+$kernel\
+  ${fs_free /}\
+  ${fs_free /home}\
+  ${acpitemp}C\
+  $mem\
+  $battery_time
