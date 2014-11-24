@@ -19,6 +19,7 @@ background no
     draw_outline no
 
     # size 24 512
+    default_color black
 
     alignment bottom_left
 

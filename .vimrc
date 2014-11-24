@@ -36,6 +36,8 @@ vnoremap qq <Esc>gv
 onoremap qq <Esc>
 inoremap qq <Esc>`^
 
+set t_Co=256
+
 set hidden
 set visualbell
 set noerrorbells
@@ -66,7 +68,7 @@ endif
 
 if &t_Co > 2 || has("gui_running")
   syntax on
-  colorscheme evening
+  colorscheme molokai
   set hlsearch
 endif
 
