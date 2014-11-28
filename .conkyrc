@@ -1,6 +1,6 @@
 background no
     use_xft yes
-    xftfont Terminus:size=12
+    xftfont Terminus:size=14
 
     gap_x 8
     gap_y 4
@@ -11,7 +11,7 @@ background no
     own_window_type normal
 
     double_buffer yes
-    update_interval 1
+    update_interval 5
     total_run_times 0
 
     draw_shades no
@@ -19,7 +19,7 @@ background no
     draw_outline no
 
     # size 24 512
-    default_color black
+    default_color darkblue
 
     alignment bottom_left
 
@@ -29,4 +29,5 @@ $kernel\
   ${fs_free /home}\
   ${acpitemp}C\
   $mem\
-  $battery_time
+  $battery_time\
+  $uptime
