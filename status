@@ -1,1 +1,23 @@
-/home/lennart/projects/check
+#!/bin/sh
+
+root=$(pwd)
+
+for repo in */
+do
+    echo "$(tput smul)$(tput setb 1)# $repo$(tput sgr0)"
+    if [ -d "$root/$repo".git ]; then
+        cd "$root/$repo"
+        if ! [ -d "$root/$repo".git/refs/remotes ]; then
+            echo "$(tput setb 4)no remote$(tput sgr0)"
+        else
+            rev_local=$(git rev-parse HEAD)
+            rev_remote=$(git rev-parse @{u})
+            if ! [ $rev_local = $rev_remote ]; then
+                echo "$(tput setb 4)need to push/pull$(tput sgr0)"
+            fi
+        fi
+        git status -s
+    else
+        echo " - no git repository"
+    fi
+done
