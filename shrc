@@ -39,6 +39,10 @@ if bin_exists notify-send; then
     alias alert="notify-send '$(ps -p $$ --no-headers -o comm,pid)'"
 fi
 
+function gh () {
+    git clone "https://github.com/lennart96/$1"
+}
+
 # vim in shell
 
 alias q=clear
