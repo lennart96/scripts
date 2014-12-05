@@ -8,6 +8,8 @@ let g:tex_flavor = "latex"
 
 set nocompatible
 
+execute pathogen#infect()
+
 set cryptmethod=blowfish
 
 set backspace=indent,eol,start
@@ -72,6 +74,9 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
+let g:neocomplete#enable_auto_close_preview = 0
+let g:acp_enableAtStartup = 0
+
 if has("autocmd")
 
   filetype plugin indent on
@@ -80,8 +85,10 @@ if has("autocmd")
   au!
 
   autocmd FileType text setlocal textwidth=72
+  autocmd FileType markdown setlocal spell
   autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
   autocmd FileType haskell set omnifunc=necoghc#omnifunc
+  autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
   autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
   autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 
