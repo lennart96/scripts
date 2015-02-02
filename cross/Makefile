@@ -4,8 +4,8 @@ PREFIX=$(HOME)/prefix
 CONF=--target="$(TARGET)" --prefix="$(PREFIX)" --disable-nls
 CONFGCC=--enable-languages=c --without-headers
 
-URL_BINUTILS="ftp://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.bz2"
-URL_GCC="ftp://ftp.gnu.org/gnu/gcc/gcc-4.8.2/gcc-4.8.2.tar.bz2"
+URL_BINUTILS="ftp://ftp.gnu.org/gnu/binutils/binutils-2.25.tar.bz2"
+URL_GCC="ftp://ftp.gnu.org/gnu/gcc/gcc-4.9.2/gcc-4.9.2.tar.bz2"
 
 all: install
 
@@ -31,7 +31,7 @@ binutils: dirs src-binutils
 	cd build-binutils; ../src-binutils/*/configure $(CONF)
 	$(MAKE) -j4 -C build-binutils
 
-gcc: binutils dirs src-gcc
+gcc: dirs src-gcc
 	cd build-gcc; ../src-gcc/*/configure $(CONF) $(CONFGCC)
 	$(MAKE) -j4 -C build-gcc all-gcc
 	$(MAKE) -j4 -C build-gcc all-target-libgcc

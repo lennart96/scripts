@@ -19,7 +19,7 @@ background no
     draw_outline no
 
     # size 24 512
-    default_color darkblue
+    default_color white
 
     alignment bottom_left
 
