@@ -11,6 +11,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'airblade/vim-gitgutter'
+Plugin 'Align'
 Plugin 'croaker/mustang-vim'
 Plugin 'gkz/vim-ls'
 Plugin 'kien/ctrlp.vim'
