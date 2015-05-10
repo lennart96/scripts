@@ -86,12 +86,14 @@ endif
 nnoremap Q gQ
 
 " zz top
-nnoremap <C-O> <C-O>zz
-nnoremap <C-I> <C-I>zz
-nnoremap { {zz
-nnoremap } }zz
-nnoremap n nzz
-nnoremap p pzz
+noremap <C-O> <C-O>zz
+noremap <C-I> <C-I>zz
+noremap { {zz
+noremap } }zz
+noremap n nzz
+noremap p pzz
+noremap [[ [[zz
+noremap ]] ]]zz
 
 " command mode
 nnoremap q; :
@@ -100,6 +102,10 @@ noremap : ;
 noremap : @:
 noremap , ;
 noremap m, ,
+
+noremap \ :bNext<CR>
+noremap \| :vsp<CR>
+noremap - :sp<CR>
 
 augroup ECW_au
     au!
@@ -117,28 +123,20 @@ map <Leader>O o<esc>O
 set fml=0
 set foldexpr=getline(v:lnum)!~@/
 noremap <Leader><Space> :set foldmethod=expr<CR>
-noremap <Leader>! :YcmDiags<CR>
-noremap <Leader>< :cprev
-noremap <Leader>> :cnext
-noremap <Leader>> :YcmDiags<CR><CR>zz
+noremap <Leader>n :enew
 
 " plugins
 let g:ctrlp_map='<c-p>'
 let g:ctrlp_cmd='CtrlP'
 let g:EasyMotion_smartcase = 1
 noremap <Leader>t :NERDTreeToggle<CR>
-map <Leader>/ <Plug>(easymotion-sn)
-map <Leader>N <Plug>(easymotion-prev)
-map <Leader>n <Plug>(easymotion-next)
-map <Leader>f <Plug>(easymotion-s)
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
-map <Leader>d :YcmCompleter GoToDefinition<CR>
-map <Leader>g :YcmCompleter GoToDeclaration<CR>
-map <Leader>s <Plug>GitGutterStageHunk
-map <Leader>r <Plug>GitGutterRevertHunk
+noremap <Leader>d :YcmCompleter GoToDeclaration<CR>
+noremap <Leader>s <Plug>GitGutterStageHunk
+noremap <Leader>r <Plug>GitGutterRevertHunk
+noremap <Leader>! :YcmDiags<CR>
+noremap <Leader>> :YcmDiags<CR><CR>zz
+noremap <Leader>< :cprev
+noremap <Leader>> :cnext
 
 " show nerdtree at startup
 autocmd StdinReadPre * let s:std_in=1
