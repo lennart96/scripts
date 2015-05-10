@@ -20,8 +20,18 @@ if bin_exists pacman ; then
     sudo pacman -S $(cat packages) --needed
 fi
 
+ln -s $HOME/repos/scripts/.zshrc $HOME/.zshrc
 ln -s $HOME/repos/scripts/shrc $HOME/.bashrc
 ln -s $HOME/repos/scripts/shrc $HOME/.zshrc
+
+mkdir -p $HOME/.vim/tmp
+git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
+
+(cd ~/.vim/bundle/YouCompleteMe; ./install.sh --clang-completer --omnisharp-completer --gocode-completer)
+
+cd .vim/bundle/YouCompleteMe
+ls
 
 make -C cross TARGET=x86_64-elf
 make -C cross TARGET=i586-elf
