@@ -10,16 +10,17 @@ filetype off
 " :PluginInstall
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'croaker/mustang-vim'
-Plugin 'vim-scripts/calmar256-lightdark.vim'
+Plugin 'gkz/vim-ls'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'othree/html5.vim'
-Plugin 'gkz/vim-ls'
 Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/calmar256-lightdark.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
 call vundle#end()
 
 filetype plugin indent on
@@ -131,6 +132,8 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 map <Leader>d :YcmCompleter GoToDefinition<CR>
 map <Leader>g :YcmCompleter GoToDeclaration<CR>
+map <Leader>s <Plug>GitGutterStageHunk
+map <Leader>r <Plug>GitGutterRevertHunk
 
 " show nerdtree at startup
 autocmd StdinReadPre * let s:std_in=1
