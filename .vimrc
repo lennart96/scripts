@@ -17,6 +17,9 @@ Plugin 'vim-scripts/calmar256-lightdark.vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'othree/html5.vim'
 Plugin 'gkz/vim-ls'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'airblade/vim-gitgutter'
 call vundle#end()
 
 filetype plugin indent on
@@ -128,6 +131,10 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 map <Leader>d :YcmCompleter GoToDefinition<CR>
 map <Leader>g :YcmCompleter GoToDeclaration<CR>
+
+" show nerdtree at startup
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_error_symbol = '!!'
