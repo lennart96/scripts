@@ -8,6 +8,15 @@ export PATH=$HOME/android-sdk/tools:$PATH
 export PATH=$PATH:$HOME/.cabal/bin:/opt/clean/bin
 export PATH=$PATH:$HOME/anaconda3/bin
 
+if [ "x$SETTERM" != x ]
+then
+    export TERM="$SETTERM"
+fi
+
+function fb() {
+    SETTERM=fbterm fbterm -n Terminus --font-size 14
+}
+
 function bin_exists () {
     type $1 > /dev/null 2>&1 || return 1
     return 0
