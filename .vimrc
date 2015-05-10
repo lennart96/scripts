@@ -16,6 +16,7 @@ Plugin 'croaker/mustang-vim'
 Plugin 'gkz/vim-ls'
 Plugin 'kien/ctrlp.vim'
 Plugin 'marijnh/tern_for_vim'
+Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'othree/html5.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
@@ -142,6 +143,8 @@ map <Leader>r <Plug>GitGutterRevertHunk
 " show nerdtree at startup
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+let g:mustache_abbreviations=1
 
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_error_symbol = '!!'
