@@ -13,12 +13,14 @@ call vundle#begin()
 Plugin 'airblade/vim-gitgutter'
 Plugin 'croaker/mustang-vim'
 Plugin 'gkz/vim-ls'
+Plugin 'kien/ctrlp.vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'othree/html5.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/calmar256-lightdark.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 call vundle#end()
@@ -119,7 +121,8 @@ noremap <Leader>> :cnext
 noremap <Leader>> :YcmDiags<CR><CR>zz
 
 " plugins
-let g:ctrlp_map='<Leader>m'
+let g:ctrlp_map='<c-p>'
+let g:ctrlp_cmd='CtrlP'
 let g:EasyMotion_smartcase = 1
 noremap <Leader>t :NERDTreeToggle<CR>
 map <Leader>/ <Plug>(easymotion-sn)
