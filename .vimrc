@@ -195,7 +195,7 @@ inoremap <C-U> <C-G>u<C-U>
 if &t_Co > 2 || has("gui_running")
     set t_Co=256
     syntax on
-    colorscheme Mustang
+    colorscheme mustang
     " colorscheme calmar256-light
     set hlsearch
     inoremap <C-Space> <C-x><C-o>
