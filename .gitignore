@@ -1,1 +1,4 @@
 *~
+/cross/build-*/
+/cross/src-*/
+/cross/*.bz2

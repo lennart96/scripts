@@ -11,8 +11,12 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'croaker/mustang-vim'
+Plugin 'vim-scripts/calmar256-lightdark.vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'othree/html5.vim'
+Plugin 'gkz/vim-ls'
 call vundle#end()
 
 filetype plugin indent on
@@ -70,9 +74,6 @@ else
   set undofile
 endif
 
-" repeat last command
-nnoremap , @:
-
 " improved ex mode
 nnoremap Q gQ
 
@@ -86,11 +87,11 @@ nnoremap p pzz
 
 " command mode
 nnoremap q; :
-nnoremap ; q:i
-nnoremap ; q:i
-nnoremap : ;
-vnoremap ; q:i
-vnoremap : ;
+noremap ; q:i
+noremap : ;
+noremap : @:
+noremap , ;
+noremap m, ,
 
 augroup ECW_au
     au!
@@ -194,8 +195,8 @@ inoremap <C-U> <C-G>u<C-U>
 if &t_Co > 2 || has("gui_running")
     set t_Co=256
     syntax on
-    " colorscheme Mustang
-    colorscheme calmar256-light
+    colorscheme Mustang
+    " colorscheme calmar256-light
     set hlsearch
     inoremap <C-Space> <C-x><C-o>
     set cul
