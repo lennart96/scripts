@@ -14,12 +14,12 @@ fi
 
 cd scripts
 
-source $(pwd)shrc
+source $(pwd)/shrc
 
-if bin_exists pacman ; then
-    sudo pacman -S $(cat packages) --needed
-fi
+sudo pacman -Syu
+sudo pacman -S --needed $(cat packages)
 
+ln -s $HOME/repos/scripts/.ycm_extra_conf.py $HOME/.ycm_extra_conf.py
 ln -s $HOME/repos/scripts/.zshrc $HOME/.zshrc
 ln -s $HOME/repos/scripts/shrc $HOME/.bashrc
 ln -s $HOME/repos/scripts/shrc $HOME/.zshrc
@@ -33,7 +33,12 @@ vim +PluginInstall +qall
 cd .vim/bundle/YouCompleteMe
 ls
 
+pip install Theano
+pip2 install Theano
+
+npm install -g LiveScript bower
+
 make -C cross TARGET=x86_64-elf
 make -C cross TARGET=i586-elf
 
-alert done -t 200000
+alert 'done!' -t 200000

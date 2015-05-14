@@ -1,6 +1,5 @@
-abiword
 acpi
-base-devel
+multilib-devel
 bash
 boost
 bzr
@@ -17,9 +16,7 @@ gdb
 ghc
 gimp
 git
-gnumeric
 go
-guake
 hexedit
 i3
 inkscape
@@ -44,10 +41,12 @@ pypy
 python2
 python2-matplotlib
 python2-numpy
+python2-pip
 python2-virtualenv
 python3
 python-matplotlib
 python-numpy
+python-pip
 python-pylint
 python-virtualenv
 qemu
@@ -62,8 +61,6 @@ tree
 tree
 uthash
 vim
-wine
-winetricks
 wmctrl
 xsel
 yaourt
