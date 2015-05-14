@@ -241,6 +241,25 @@ augroup vimrcEx
         \ endif
 augroup END
 
+" first attempt at vimscript, beware
+let s:colorschemes = ['github', 'mustang', 'calmar256-light']
+
+function! s:NextColor()
+    if exists('g:colors_name')
+        let next_index = index(s:colorschemes, g:colors_name) + 1
+    else
+        let next_index = 0
+    endif
+    if next_index >= len(s:colorschemes)
+        let next_index = 0
+    endif
+    execute 'colorscheme ' . s:colorschemes[next_index]
+endfunction
+
+command! NextColor call s:NextColor()
+noremap mc :NextColor<CR>
+
+" 'difforig'
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
           \ | wincmd p | diffthis
