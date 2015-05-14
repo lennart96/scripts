@@ -25,6 +25,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/calmar256-lightdark.vim'
+Plugin 'xoria256.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 call vundle#end()
 
@@ -242,7 +243,13 @@ augroup vimrcEx
 augroup END
 
 " first attempt at vimscript, beware
-let s:colorschemes = ['github', 'mustang', 'calmar256-light']
+let s:colorschemes = [
+    \ 'github',
+    \ 'mustang',
+    \ 'calmar256-light',
+    \ 'calmar256-dark',
+    \ 'blue',
+    \ 'xoria256']
 
 function! s:NextColor()
     if exists('g:colors_name')
