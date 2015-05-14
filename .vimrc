@@ -13,6 +13,7 @@ call vundle#begin()
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Align'
 Plugin 'croaker/mustang-vim'
+Plugin 'endel/vim-github-colorscheme'
 Plugin 'gkz/vim-ls'
 Plugin 'kien/ctrlp.vim'
 Plugin 'marijnh/tern_for_vim'
@@ -30,7 +31,7 @@ call vundle#end()
 filetype plugin indent on
 
 " leader
-let mapleader="m"
+let mapleader="<F3>"
 
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_checkers_args='--ignore=E501,E25'
@@ -70,6 +71,9 @@ set history=1000
 set showcmd
 set incsearch
 set backspace=indent,eol,start
+set ffs=unix
+set foldmethod=syntax
+
 " info
 "set statusline=%1*%m%*%F
 "visualize whitespace
@@ -95,6 +99,11 @@ noremap p pzz
 noremap [[ [[zz
 noremap ]] ]]zz
 
+" tabs
+noremap \ :bNext<CR>
+noremap \| :vsp<CR>
+noremap _ :sp<CR>
+
 " command mode
 nnoremap q; :
 noremap ; q:i
@@ -102,10 +111,6 @@ noremap : ;
 noremap : @:
 noremap , ;
 noremap m, ,
-
-noremap \ :bNext<CR>
-noremap \| :vsp<CR>
-noremap - :sp<CR>
 
 augroup ECW_au
     au!
@@ -116,31 +121,33 @@ augroup ECW_au
 augroup END
 
 " double o
-map <Leader>o o<esc>o
-map <Leader>O o<esc>O
+map mo o<esc>o
+map mO o<esc>O
 
 " fold search
 set fml=0
 set foldexpr=getline(v:lnum)!~@/
-noremap <Leader><Space> :set foldmethod=expr<CR>
-noremap <Leader>n :enew
+noremap m<Space> :set foldmethod=expr<CR>
+noremap mn :enew
 
 " plugins
-let g:ctrlp_map='<c-p>'
+let g:ctrlp_map='-'
 let g:ctrlp_cmd='CtrlP'
+let g:ctrlp_match_window='top,order:ttb,min:10,max:10'
+
 let g:EasyMotion_smartcase = 1
-noremap <Leader>t :NERDTreeToggle<CR>
-noremap <Leader>d :YcmCompleter GoToDeclaration<CR>
-noremap <Leader>s <Plug>GitGutterStageHunk
-noremap <Leader>r <Plug>GitGutterRevertHunk
-noremap <Leader>! :YcmDiags<CR>
-noremap <Leader>> :YcmDiags<CR><CR>zz
-noremap <Leader>< :cprev
-noremap <Leader>> :cnext
+noremap mt :NERDTreeToggle<CR>
+noremap md :YcmCompleter GoToDeclaration<CR>
+noremap ms :GitGutterStageHunk<CR>
+noremap mr :GitGutterRevertHunk<CR>
+noremap m! :YcmDiags<CR>
+noremap m> :YcmDiags<CR><CR>zz
+noremap m< :cprev
+noremap m> :cnext
 
 " show nerdtree at startup
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let g:mustache_abbreviations=1
 
@@ -210,7 +217,8 @@ inoremap <C-U> <C-G>u<C-U>
 if &t_Co > 2 || has("gui_running")
     set t_Co=256
     syntax on
-    colorscheme mustang
+    color github
+    " colorscheme mustang
     " colorscheme calmar256-light
     set hlsearch
     inoremap <C-Space> <C-x><C-o>
