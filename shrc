@@ -11,6 +11,8 @@ export PATH=$PATH:$HOME/anaconda3/bin
 if [ "x$SETTERM" != x ]
 then
     export TERM="$SETTERM"
+else
+    export  TERM="linux"
 fi
 
 function fb() {

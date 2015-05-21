@@ -41,6 +41,7 @@ let g:syntastic_python_checkers_args='--ignore=E501,E25'
 set backup
 set backupdir=~/Dropbox/backup/vim
 set directory=~/.vim/tmp
+set undolevels=10000
 
 " better autocomplete selection
 set completeopt=menuone,longest,preview
@@ -72,8 +73,8 @@ set history=1000
 set showcmd
 set incsearch
 set backspace=indent,eol,start
-set ffs=unix
 set foldmethod=syntax
+set nofoldenable
 
 " info
 "set statusline=%1*%m%*%F
@@ -199,6 +200,7 @@ cmap w!! w !sudo tee % >/dev/null
 vnoremap <Space> zf
 nnoremap <Space> :YcmCompleter GoTo<CR>
 
+set colorcolumn=72,80
 
 " windows
 nnoremap <C-c> <C-w>c
@@ -233,6 +235,7 @@ augroup vimrcEx
     au FileType text setlocal textwidth=72
     au FileType markdown setlocal spell
     au FileType make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
+    au FileType ls setlocal foldmethod=indent nofoldenable
     au BufNewFile,BufRead *.pde setlocal ft=arduino
     au BufNewFile,BufRead *.ino setlocal ft=arduino
     " not sure what this line does
@@ -261,6 +264,8 @@ function! s:NextColor()
         let next_index = 0
     endif
     execute 'colorscheme ' . s:colorschemes[next_index]
+    " TODO: find out whats wrong
+    hi NonText ctermbg=NONE
 endfunction
 
 command! NextColor call s:NextColor()
@@ -272,6 +277,9 @@ if !exists(":DiffOrig")
           \ | wincmd p | diffthis
 endif
 
+" TODO
 if filereadable("~/.rainbow.vim")
     source ~/.rainbow.vim
 end
+
+hi NonText ctermbg=NONE
