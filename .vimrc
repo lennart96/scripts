@@ -20,6 +20,7 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'othree/html5.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'suan/vim-instant-markdown'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
@@ -220,9 +221,6 @@ inoremap <C-U> <C-G>u<C-U>
 if &t_Co > 2 || has("gui_running")
     set t_Co=256
     syntax on
-    color github
-    " colorscheme mustang
-    " colorscheme calmar256-light
     set hlsearch
     inoremap <C-Space> <C-x><C-o>
     set cul
@@ -270,6 +268,11 @@ endfunction
 
 command! NextColor call s:NextColor()
 noremap mc :NextColor<CR>
+call s:NextColor()
+
+if $DISPLAY == ''
+    let g:instant_markdown_autostart=0
+endif
 
 " 'difforig'
 if !exists(":DiffOrig")
@@ -277,9 +280,9 @@ if !exists(":DiffOrig")
           \ | wincmd p | diffthis
 endif
 
-" TODO
-if filereadable("~/.rainbow.vim")
-    source ~/.rainbow.vim
-end
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 hi NonText ctermbg=NONE
