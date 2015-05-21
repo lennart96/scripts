@@ -250,7 +250,6 @@ let s:colorschemes = [
     \ 'github',
     \ 'mustang',
     \ 'calmar256-light',
-    \ 'calmar256-dark',
     \ 'blue',
     \ 'xoria256']
 
