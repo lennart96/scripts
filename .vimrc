@@ -16,6 +16,7 @@ Plugin 'croaker/mustang-vim'
 Plugin 'endel/vim-github-colorscheme'
 Plugin 'gkz/vim-ls'
 Plugin 'kien/ctrlp.vim'
+Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'othree/html5.vim'
@@ -248,7 +249,6 @@ let s:colorschemes = [
     \ 'github',
     \ 'mustang',
     \ 'calmar256-light',
-    \ 'calmar256-dark',
     \ 'blue',
     \ 'xoria256']
 
