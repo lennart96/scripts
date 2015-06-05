@@ -1,0 +1,22 @@
+#!/bin/sh
+
+cmd="redis-cli -h 192.168.0.234 PUBLISH status"
+name=status
+
+if [ "$#" -ge 1 ]; then
+    name=$1
+    shift
+fi
+
+
+if [ "$#" -ge 2 ]; then
+    status="$@"
+    $cmd "$name:$status" > /dev/null
+    echo "$status"
+else
+    while read line
+    do
+        $cmd "$name:$line" > /dev/null
+        echo "$line"
+    done
+fi
