@@ -7,13 +7,7 @@ export PATH=$HOME/android-sdk/platform-tools:$PATH
 export PATH=$HOME/android-sdk/tools:$PATH
 export PATH=$PATH:$HOME/.cabal/bin:/opt/clean/bin
 export PATH=$PATH:$HOME/anaconda3/bin
-
-if [ "x$SETTERM" != x ]
-then
-    export TERM="$SETTERM"
-else
-    export  TERM="linux"
-fi
+export PATH=$PATH:"$PATH:/opt/tee-clc-11.0.0"
 
 function fb() {
     SETTERM=fbterm fbterm -n Terminus --font-size 14
@@ -67,8 +61,11 @@ alias edit=:e
 alias m=make
 alias mr='clear;:r'
 
-alias ls='ls --time-style=+"%Y-%m-%d %H:%M" --color --group-directories-first'
-alias grep='grep --color'
+alias ls='ls --time-style=+"%Y-%m-%d %H:%M" --color=auto --group-directories-first'
+alias grep='grep --color=auto'
+alias cgrep='grep --color=always'
+alias cls='ls --color=always'
+alias cless='less -R'
 alias l='ls -1 | grep -v "~"'
 
 # human-friendly
@@ -78,6 +75,18 @@ alias df='df -h'
 
 alias ipynb='ipython notebook'
 alias ipy="ipython -i -c 'cd ~/Dropbox/ipython' --pylab --no-banner --no-confirm-exit --classic --autocall=1"
+
+function c() {
+    dir="$1"
+    if [ "$dir" != "" ]; then
+        ls -d "$dir" 2>&1 > /dev/null || mkdir "$dir"
+        cd "$dir"
+    else
+        clear
+        pwd
+    fi
+    ls -1t | head -n 10 | column
+}
 
 export HISTSIZE=20000
 
@@ -106,6 +115,23 @@ if [ -n "$ZSH_VERSION" ]; then
     PROMPT='%(?.. -> %? 
 )%{%4F%}%2~%{%f%}'
     TIMEFMT='%J  -- %E (%U+%S %Mkb %c+%w)'
+
+    function ctrlp() {
+        BUFFER="vim +':CtrlP'"
+        zle accept-line
+    }
+
+    zle -N ctrlp
+
+    bindkey '^p' ctrlp
+
+    if [ "x$SETTERM" != x ]
+    then
+        export TERM="$SETTERM"
+    else
+        export  TERM="linux"
+    fi
+
 
 elif [ -n "$BASH_VERSION" ]; then
 

@@ -1,0 +1,24 @@
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+XTerm*termName: xterm-256color
+XTerm*locale: true
+XTerm*metaSendsEscape: true
+XTerm*saveLines: 10000
+XTerm*faceName: Fira Mono:size=11:antialias=true
+XTerm*allowBoldFonts: false
+XTerm*fade: 60
+XTerm*BorderWidth: 0
+
+urxvt*font: xft:Terminus:pixelsize=14
+urxvt*scrollBar: false
+urxvt*saveLines: 10000
+urxvt*pointerBlank: true
+
+*foreground: rgb:00/00/00
+*background: rgb:fa/fa/ff

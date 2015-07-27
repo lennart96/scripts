@@ -135,9 +135,10 @@ noremap m<Space> :set foldmethod=expr<CR>
 noremap mn :enew
 
 " plugins
-let g:ctrlp_map='-'
+let g:ctrlp_map='<C-P>'
 let g:ctrlp_cmd='CtrlP'
 let g:ctrlp_match_window='top,order:ttb,min:10,max:10'
+set mouse=a
 
 let g:EasyMotion_smartcase = 1
 noremap mt :NERDTreeToggle<CR>
