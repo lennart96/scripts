@@ -201,7 +201,7 @@ cmap w!! w !sudo tee % >/dev/null
 " space to fold
 " nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
-nnoremap <Space> :YcmCompleter GoTo<CR>
+nnoremap <Space> :w<cr>
 
 set colorcolumn=72,80
 
@@ -247,8 +247,8 @@ augroup END
 
 " first attempt at vimscript, beware
 let s:colorschemes = [
-    \ 'github',
     \ 'mustang',
+    \ 'github',
     \ 'calmar256-light',
     \ 'blue',
     \ 'xoria256']

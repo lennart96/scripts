@@ -15,7 +15,7 @@ floating_modifier $mod
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:Fira Mono 7
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -25,11 +25,16 @@ font pango:DejaVu Sans Mono 8
 
 
 exec i3-sensible-terminal
+exec_always xrdb ~/.Xresources
 exec_always dropbox start
 exec_always volumeicon
-exec_always setxkbmap -option 'caps:swapescape'
+exec_always hp-systray
+exec_always nm-applet
+# exec_always setxkbmap -option 'caps:swapescape'
+exec_always setxkbmap -option 'ctrl:nocaps'
 exec_always nitrogen --restore
-exec_always compton -CGb -i 0.8 -m 0.85 -f -D 15
+# exec_always compton -CGb -i 0.8 -m 0.85 -f -D 15
+exec_always compton -CGb -o 0.75 -D 10 -m 1 -i 0.7 -e 0.8 --active-opacity 0.8
 
 new_window none
 new_float none
@@ -64,9 +69,9 @@ bindsym $mod+Shift+l move right
 bindsym $mod+v split v
 bindsym $mod+Shift+v split h
 
-bindsym $mod+a layout stacking
-bindsym $mod+d layout tabbed
-bindsym $mod+s layout toggle split
+bindsym $mod+a layout toggle split
+bindsym $mod+d layout stacking
+bindsym $mod+s layout tabbed
 
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle

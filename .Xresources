@@ -20,5 +20,5 @@ urxvt*scrollBar: false
 urxvt*saveLines: 10000
 urxvt*pointerBlank: true
 
-*foreground: rgb:00/00/00
-*background: rgb:fa/fa/ff
+*background: rgb:00/00/00
+*foreground: rgb:fa/fa/ff
