@@ -125,6 +125,9 @@ if [ -n "$ZSH_VERSION" ]; then
 
     bindkey '^p' ctrlp
 
+    bindkey '^k' up-line-or-search
+    bindkey '^j' down-line-or-search
+
     if [ "x$SETTERM" != x ]
     then
         export TERM="$SETTERM"
