@@ -24,7 +24,6 @@ font pango:Fira Mono 7
 # font, it doesn’t scale on retina/hidpi displays.
 
 
-exec i3-sensible-terminal
 exec_always xrdb ~/.Xresources
 exec_always dropbox start
 exec_always volumeicon
@@ -34,7 +33,8 @@ exec_always nm-applet
 exec_always setxkbmap -option 'ctrl:nocaps'
 exec_always nitrogen --restore
 # exec_always compton -CGb -i 0.8 -m 0.85 -f -D 15
-exec_always compton -CGb -o 0.75 -D 10 -m 1 -i 0.7 -e 0.8 --active-opacity 0.8
+# exec_always compton -CGb -o 0.75 -D 10 -m 1 -i 0.7 -e 0.8 --active-opacity 0.8
+exec_always compton -CGb -D 10 -m 1 --config ~/.compton
 
 new_window none
 new_float none
@@ -107,10 +107,21 @@ bindsym $mod+Shift+c reload
 bindsym  $mod+Shift+q exec i3-msg exit
 
 mode "resize" {
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
+
+        bindsym h resize shrink width 30 px or 30 ppt
+        bindsym j resize grow height 30 px or 30 ppt
+        bindsym k resize shrink height 30 px or 30 ppt
+        bindsym l resize grow width 30 px or 30 ppt
+
+        bindsym Shift+h move left 30 px
+        bindsym Shift+j move down 30 px
+        bindsym Shift+k move up 30 px
+        bindsym Shift+l move right 30 px
+
+        bindsym Control+h Resize shrink width 5 px or 5 ppt
+        bindsym Control+j resize grow height 5 px or 5 ppt
+        bindsym Control+k resize shrink height 5 px or 5 ppt
+        bindsym Control+l resize grow width 5 px or 5 ppt
 
         bindsym $mod+h focus left
         bindsym $mod+j focus down
@@ -119,9 +130,14 @@ mode "resize" {
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym space mode "default"
 }
 
 bar {
         status_command i3status
         position top
+        mode hide
+        hidden_state hide
+        modifier Mod4
+        font pango:Helvetica Neue 12
 }
