@@ -21,6 +21,8 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'othree/html5.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
@@ -134,6 +136,11 @@ set foldexpr=getline(v:lnum)!~@/
 noremap m<Space> :set foldmethod=expr<CR>
 noremap mn :enew
 
+" vimdiff
+noremap mml :diffget LO<cr>
+noremap mmb :diffget BA<cr>
+noremap mmr :diffget RE<cr>
+
 " plugins
 let g:ctrlp_map='<C-P>'
 let g:ctrlp_cmd='CtrlP'
@@ -203,7 +210,7 @@ cmap w!! w !sudo tee % >/dev/null
 vnoremap <Space> zf
 nnoremap <Space> :w<cr>
 
-set colorcolumn=72,80
+set colorcolumn=80
 
 " windows
 nnoremap <C-c> <C-w>c
@@ -232,8 +239,7 @@ endif
 " filetype specific
 augroup vimrcEx
     au!
-    au FileType text setlocal textwidth=72
-    au FileType markdown setlocal spell
+    au FileType text setlocal textwidth=80
     au FileType make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
     au FileType ls setlocal foldmethod=indent nofoldenable
     au BufNewFile,BufRead *.pde setlocal ft=arduino
