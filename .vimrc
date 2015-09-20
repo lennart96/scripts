@@ -79,6 +79,7 @@ set incsearch
 set backspace=indent,eol,start
 set foldmethod=syntax
 set nofoldenable
+set relativenumber
 
 " info
 "set statusline=%1*%m%*%F
@@ -209,6 +210,7 @@ cmap w!! w !sudo tee % >/dev/null
 " nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 nnoremap <Space> :w<cr>
+nnoremap <cr> o<cr>k
 
 set colorcolumn=80
 
