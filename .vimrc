@@ -44,6 +44,7 @@ let g:syntastic_python_checkers_args='--ignore=E501,E25'
 " no more *~ files
 set backup
 set backupdir=~/Dropbox/backup/vim
+set undodir=~/.vim/tmp
 set directory=~/.vim/tmp
 set undolevels=10000
 
