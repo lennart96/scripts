@@ -280,6 +280,10 @@ command! NextColor call s:NextColor()
 noremap mc :NextColor<CR>
 call s:NextColor()
 
+if &diff
+    colorscheme github
+endif
+
 if $DISPLAY == ''
     let g:instant_markdown_autostart=0
 endif
