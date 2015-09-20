@@ -123,7 +123,10 @@ if [ -n "$ZSH_VERSION" ]; then
 
     zle -N ctrlp
 
-    bindkey '^p' ctrlp
+    bindkey '^P' ctrlp
+    bindkey '^ ' list-choices
+    bindkey '^n' menu-complete
+    bindkey '^p' reverse-menu-complete
 
     bindkey '^k' up-line-or-search
     bindkey '^j' down-line-or-search
