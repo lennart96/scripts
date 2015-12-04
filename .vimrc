@@ -78,8 +78,7 @@ set history=1000
 set showcmd
 set incsearch
 set backspace=indent,eol,start
-set foldmethod=syntax
-set nofoldenable
+set foldmethod=indent
 set relativenumber
 
 " info
@@ -109,8 +108,8 @@ noremap ]] ]]zz
 
 " tabs
 noremap \ :bNext<CR>
-noremap \| :vsp<CR>
-noremap _ :sp<CR>
+noremap \| :vsp<CR>:CtrlP<cr>
+noremap _ :sp<CR>:CtrlP<cr>
 
 " command mode
 nnoremap q; :
@@ -132,11 +131,12 @@ augroup END
 map mo o<esc>o
 map mO o<esc>O
 
+noremap m/ /asdfasdfasdf<cr>
+
 " fold search
-set fml=0
-set foldexpr=getline(v:lnum)!~@/
+" set fml=0
+" set foldexpr=getline(v:lnum)!~@/
 noremap m<Space> :set foldmethod=expr<CR>
-noremap mn :enew
 
 " vimdiff
 noremap mml :diffget LO<cr>
@@ -211,7 +211,6 @@ cmap w!! w !sudo tee % >/dev/null
 " nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 nnoremap <Space> :w<cr>
-nnoremap <cr> o<cr>k
 
 set colorcolumn=80
 
@@ -242,6 +241,9 @@ endif
 " filetype specific
 augroup vimrcEx
     au!
+    au FileType javascript noremap <buffer> gd :TernDef<cr>
+    au FileType javascript noremap <buffer> gr :TernRefs<cr>
+    au FileType javascript noremap <buffer> mn :TernRename<cr>
     au FileType text setlocal textwidth=80
     au FileType make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
     au FileType ls setlocal foldmethod=indent nofoldenable
@@ -280,6 +282,48 @@ command! NextColor call s:NextColor()
 noremap mc :NextColor<CR>
 call s:NextColor()
 
+
+augroup PLUGIN
+
+autocmd!
+
+let g:watches = []
+
+function! s:RunWatch()
+    if empty(g:watches)
+        return
+    endif
+    for watch in g:watches
+        let [bufferid, cmd] = watch
+        silent vsplit
+        silent execute ":buffer " . bufferid
+        silent setlocal modifiable
+        silent 1,$delete
+        silent execute ':silent read !' . cmd
+        silent 1,1delete
+        silent setlocal nomodifiable
+        silent close
+    endfor
+    redraw!
+endfunction
+
+function! s:Watch(cmd)
+    py import uuid
+    let bufferid = pyeval("str(uuid.uuid4())")
+    botright new
+    setlocal buftype=nofile noswapfile nowrap " bufhidden=wipe nobuflisten
+    execute ":file " .  bufferid
+    call insert(g:watches, [bufferid, a:cmd])
+    call s:RunWatch()
+endfunction
+
+command! -nargs=1 -complete=command Watch call s:Watch('<args>')
+
+autocmd BufWritePost * call s:RunWatch()
+
+augroup END
+
+
 if &diff
     colorscheme github
 endif
@@ -300,3 +344,5 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 hi NonText ctermbg=NONE
+
+set foldlevel=99
