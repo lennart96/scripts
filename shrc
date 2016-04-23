@@ -1,6 +1,6 @@
 unset SSH_ASKPASS
 
-export BROWSER=$(which xdg-open)
+export BROWSER=$(which luakit)
 export EDITOR=vim
 export PATH=$HOME/prefix/bin:$PATH
 export PATH=$HOME/android-sdk/platform-tools:$PATH

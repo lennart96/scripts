@@ -12,17 +12,26 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Align'
+Plugin 'andreasvc/vim-256noir'
+Plugin 'bitc/vim-hdevtools.git'
+Plugin 'C64.vim'
 Plugin 'croaker/mustang-vim'
+Plugin 'derekwyatt/vim-fswitch'
 Plugin 'endel/vim-github-colorscheme'
+Plugin 'fent/vim-frozen'
 Plugin 'gkz/vim-ls'
+Plugin 'godlygeek/tabular'
+Plugin 'ikaros/smpl-vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'marijnh/tern_for_vim'
+Plugin 'mkarmona/materialbox'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'nowk/genericdc'
 Plugin 'othree/html5.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'godlygeek/tabular'
+Plugin 'peterhoeg/vim-qml'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'rsmenon/vim-mathematica'
+Plugin 'scrooloose/nerdtree'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
@@ -30,6 +39,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/calmar256-lightdark.vim'
 Plugin 'xoria256.vim'
+Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 call vundle#end()
 
@@ -40,6 +50,7 @@ let mapleader="<F3>"
 
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_checkers_args='--ignore=E501,E25'
+let g:syntastic_check_on_wq = 0
 
 " no more *~ files
 set backup
@@ -80,6 +91,7 @@ set incsearch
 set backspace=indent,eol,start
 set foldmethod=indent
 set relativenumber
+set nowrap
 
 " info
 "set statusline=%1*%m%*%F
@@ -107,9 +119,12 @@ noremap [[ [[zz
 noremap ]] ]]zz
 
 " tabs
-noremap \ :bNext<CR>
-noremap \| :vsp<CR>:CtrlP<cr>
+noremap \ :bnext<cr>
+noremap \| :bprevious<cr>
+noremap - :vsp<CR>:CtrlP<cr>
 noremap _ :sp<CR>:CtrlP<cr>
+
+noremap <s-h> :FSHere<cr>
 
 " command mode
 nnoremap q; :
@@ -127,11 +142,16 @@ augroup ECW_au
     au CmdwinLeave * nnoremap ; q:i
 augroup END
 
+augroup FSwitchConf
+    au!
+    au BufEnter *.cpp let b:fswitchdst = 'h'
+augroup END
+
 " double o
 map mo o<esc>o
 map mO o<esc>O
 
-noremap m/ /asdfasdfasdf<cr>
+noremap m/ /bdubuvtdshqinsiq<cr>
 
 " fold search
 " set fml=0
@@ -147,6 +167,14 @@ noremap mmr :diffget RE<cr>
 let g:ctrlp_map='<C-P>'
 let g:ctrlp_cmd='CtrlP'
 let g:ctrlp_match_window='top,order:ttb,min:10,max:10'
+let g:ctrlp_switch_buffer='0'
+let g:ctrlp_open_new_file='r'
+let g:ctrlp_tabpage_position='c'
+let g:ctrlp_root_margers=['node_modules', '.cabal-sandbox']
+let g:ctrlp_clear_cache_on_exit=0
+let g:ctrlp_custom_ignore='node_modules,.cabal-sandbox'
+let g:ctrlp_prompt_mappings={'PrtClearCache()': ['<f5>', '<c-r>']}
+
 set mouse=a
 
 let g:EasyMotion_smartcase = 1
@@ -189,6 +217,7 @@ let g:ycm_semantic_triggers =  {
 \   'lua' : ['.', ':'],
 \   'erlang' : [':'],
 \   'html' : ['re!<[^>]*', '.'],
+\   'rs': ['.', '::'],
 \ }
 
 function! Pipe(cmd)
@@ -241,9 +270,11 @@ endif
 " filetype specific
 augroup vimrcEx
     au!
-    au FileType javascript noremap <buffer> gd :TernDef<cr>
-    au FileType javascript noremap <buffer> gr :TernRefs<cr>
-    au FileType javascript noremap <buffer> mn :TernRename<cr>
+    au FileType haskell nnoremap <buffer> gt :HdevtoolsType<cr>
+    au FileType haskell nnoremap <buffer> <silent> gT :HdevtoolsClear<cr>
+    "au FileType javascript noremap <buffer> gd :TernDef<cr>
+    "au FileType javascript noremap <buffer> gr :TernRefs<cr>
+    "au FileType javascript noremap <buffer> mn :TernRename<cr>
     au FileType text setlocal textwidth=80
     au FileType make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
     au FileType ls setlocal foldmethod=indent nofoldenable
@@ -259,10 +290,18 @@ augroup END
 " first attempt at vimscript, beware
 let s:colorschemes = [
     \ 'mustang',
+    \ '256_noir',
+    \ 'smpl',
+    \ 'genericdc',
+    \ 'frozen',
+    \ 'C64',
+    \ 'genericdc-light',
     \ 'github',
     \ 'calmar256-light',
     \ 'blue',
-    \ 'xoria256']
+    \ 'xoria256',
+    \ 'materialbox',
+    \ 'default']
 
 function! s:NextColor()
     if exists('g:colors_name')
@@ -325,7 +364,7 @@ augroup END
 
 
 if &diff
-    colorscheme github
+    colorscheme mustang
 endif
 
 if $DISPLAY == ''
@@ -344,5 +383,7 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 hi NonText ctermbg=NONE
+
+let g:ycm_rust_src_path = '/home/lennart/rustlib/rustc-1.7.0/src'
 
 set foldlevel=99
