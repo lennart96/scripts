@@ -24,6 +24,7 @@ font pango:Fira Mono 7
 # font, it doesn’t scale on retina/hidpi displays.
 
 
+exec_always sh -c 'sleep 10; xcape'
 exec_always xrdb ~/.Xresources
 exec_always dropbox start
 exec_always volumeicon
@@ -35,6 +36,7 @@ exec_always nitrogen --restore
 # exec_always compton -CGb -i 0.8 -m 0.85 -f -D 15
 # exec_always compton -CGb -o 0.75 -D 10 -m 1 -i 0.7 -e 0.8 --active-opacity 0.8
 exec_always compton -CGb -D 10 -m 1 --config ~/.compton
+exec ~/tmp/window-overlay/exe
 
 new_window none
 new_float none
@@ -46,7 +48,7 @@ bindsym $mod+Shift+z move container to workspace back_and_forth
 
 bindsym $mod+p exec thunar
 bindsym $mod+o exec luakit
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec lxterminal
 
 bindsym $mod+w mode "resize"
 
@@ -61,10 +63,10 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left 60 px
+bindsym $mod+Shift+j move down 60 px
+bindsym $mod+Shift+k move up 60 px
+bindsym $mod+Shift+l move right 60 px
 
 bindsym $mod+v split v
 bindsym $mod+Shift+v split h
@@ -75,6 +77,7 @@ bindsym $mod+s layout tabbed
 
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+Return floating toggle
 
 #bindsym $mod+y focus parent
 #bindsym $mod+d focus child
@@ -108,17 +111,17 @@ bindsym  $mod+Shift+q exec i3-msg exit
 
 mode "resize" {
 
-        bindsym h resize shrink width 30 px or 30 ppt
-        bindsym j resize grow height 30 px or 30 ppt
-        bindsym k resize shrink height 30 px or 30 ppt
-        bindsym l resize grow width 30 px or 30 ppt
+        bindsym h move left 30 px
+        bindsym j move down 30 px
+        bindsym k move up 30 px
+        bindsym l move right 30 px
 
-        bindsym Shift+h move left 30 px
-        bindsym Shift+j move down 30 px
-        bindsym Shift+k move up 30 px
-        bindsym Shift+l move right 30 px
+        bindsym Shift+h resize shrink width 30 px or 30 ppt
+        bindsym Shift+j resize grow height 30 px or 30 ppt
+        bindsym Shift+k resize shrink height 30 px or 30 ppt
+        bindsym Shift+l resize grow width 30 px or 30 ppt
 
-        bindsym Control+h Resize shrink width 5 px or 5 ppt
+        bindsym Control+h resize shrink width 5 px or 5 ppt
         bindsym Control+j resize grow height 5 px or 5 ppt
         bindsym Control+k resize shrink height 5 px or 5 ppt
         bindsym Control+l resize grow width 5 px or 5 ppt
