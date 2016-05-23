@@ -4,6 +4,11 @@ endif
 
 set nocompatible
 
+" inoremap <bs> <nop>
+" inoremap <cr> <nop>
+" nnoremap jj <nop>
+" nnoremap kk <nop>
+
 filetype off
 
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -11,20 +16,12 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'airblade/vim-gitgutter'
-Plugin 'Align'
-Plugin 'andreasvc/vim-256noir'
-Plugin 'bitc/vim-hdevtools.git'
-Plugin 'C64.vim'
 Plugin 'croaker/mustang-vim'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'endel/vim-github-colorscheme'
-Plugin 'fent/vim-frozen'
-Plugin 'gkz/vim-ls'
 Plugin 'godlygeek/tabular'
-Plugin 'ikaros/smpl-vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'mkarmona/materialbox'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nowk/genericdc'
 Plugin 'othree/html5.vim'
@@ -32,14 +29,11 @@ Plugin 'peterhoeg/vim-qml'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'rsmenon/vim-mathematica'
 Plugin 'scrooloose/nerdtree'
-Plugin 'suan/vim-instant-markdown'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/calmar256-lightdark.vim'
-Plugin 'xoria256.vim'
-Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 call vundle#end()
 
@@ -59,22 +53,16 @@ set undodir=~/.vim/tmp
 set directory=~/.vim/tmp
 set undolevels=10000
 
-" better autocomplete selection
-set completeopt=menuone,longest,preview
-" no double spaces
+set completeopt=menuone,preview,noinsert,noselect
 set nojoinspaces
-" security
 set cryptmethod=blowfish
-" window creation
 set splitbelow
 set splitright
-" indentation
 set tabstop=4
 set shiftwidth=4
 set expandtab
 set copyindent
 set shiftround
-" other
 set autochdir
 set ttyfast
 set hidden
@@ -83,13 +71,13 @@ set noerrorbells
 set timeoutlen=1000 ttimeoutlen=0
 set ignorecase
 set smartcase
-set pastetoggle=<F2>
+set pastetoggle=mp
 set wildignore=*.o,*~,*.pyc,__pycache__,.git
 set history=1000
 set showcmd
 set incsearch
 set backspace=indent,eol,start
-set foldmethod=indent
+set foldmethod=manual
 set relativenumber
 set nowrap
 
@@ -98,6 +86,7 @@ set nowrap
 "visualize whitespace
 set list
 set listchars=tab:__,trail:.,extends:$,nbsp:.,conceal:-,precedes:>
+
 if has("vms")
   set nobackup
 else
@@ -108,23 +97,24 @@ endif
 " improved ex mode
 nnoremap Q gQ
 
-" zz top
-noremap <C-O> <C-O>zz
-noremap <C-I> <C-I>zz
-noremap { {zz
-noremap } }zz
-noremap n nzz
-noremap p pzz
-noremap [[ [[zz
-noremap ]] ]]zz
-
 " tabs
-noremap \ :bnext<cr>
-noremap \| :bprevious<cr>
-noremap - :vsp<CR>:CtrlP<cr>
-noremap _ :sp<CR>:CtrlP<cr>
+noremap <silent> \ :bnext<cr>
+noremap <silent> \| :bprevious<cr>
+noremap <silent> ml :rightb :vsplit<cr>
+noremap <silent> mh :lefta :vsplit<cr>
+noremap <silent> mk :rightb :split<cr><c-w>k
+noremap <silent> mj :lefta :split<cr><c-w>j
+noremap <silent> mL :rightb :vsplit<cr>:CtrlP<cr>
+noremap <silent> mH :lefta :vsplit<cr>:CtrlP<cr>
+noremap <silent> mK :rightb :split<cr><c-w>k:CtrlP<cr>
+noremap <silent> mJ :lefta :split<cr><c-w>j:CtrlP<cr>
 
-noremap <s-h> :FSHere<cr>
+nnoremap <expr> <silent> - ':-' . (v:count ? v:count : '1')
+nnoremap <expr> <silent> = ':+' . (v:count ? v:count : '1')
+nnoremap <expr> <silent> _ ':-' . (v:count ? v:count : '1') . ','
+nnoremap <expr> <silent> + ':,+' . (v:count ? v:count : '1')
+
+noremap <silent> <s-h> :FSHere<cr>
 
 " command mode
 nnoremap q; :
@@ -147,21 +137,9 @@ augroup FSwitchConf
     au BufEnter *.cpp let b:fswitchdst = 'h'
 augroup END
 
-" double o
-map mo o<esc>o
-map mO o<esc>O
-
-noremap m/ /bdubuvtdshqinsiq<cr>
-
-" fold search
-" set fml=0
-" set foldexpr=getline(v:lnum)!~@/
-noremap m<Space> :set foldmethod=expr<CR>
-
 " vimdiff
-noremap mml :diffget LO<cr>
-noremap mmb :diffget BA<cr>
-noremap mmr :diffget RE<cr>
+noremap <silent> m[ :diffget LO<cr>
+noremap <silent> m] :diffget RE<cr>
 
 " plugins
 let g:ctrlp_map='<C-P>'
@@ -177,15 +155,14 @@ let g:ctrlp_prompt_mappings={'PrtClearCache()': ['<f5>', '<c-r>']}
 
 set mouse=a
 
-let g:EasyMotion_smartcase = 1
-noremap mt :NERDTreeToggle<CR>
-noremap md :YcmCompleter GoToDeclaration<CR>
-noremap ms :GitGutterStageHunk<CR>
-noremap mr :GitGutterRevertHunk<CR>
-noremap m! :YcmDiags<CR>
-noremap m> :YcmDiags<CR><CR>zz
-noremap m< :cprev
-noremap m> :cnext
+noremap <silent> mt :NERDTreeToggle<CR>
+noremap <silent> md :YcmCompleter GoToDeclaration<CR>
+noremap <silent> ms :GitGutterStageHunk<CR>
+noremap <silent> mr :GitGutterRevertHunk<CR>
+noremap <silent> m! :YcmDiags<CR>
+noremap <silent> m> :YcmDiags<CR><CR>zz
+noremap <silent> m< :cprev
+noremap <silent> m> :cnext
 
 " show nerdtree at startup
 " autocmd StdinReadPre * let s:std_in=1
@@ -238,8 +215,9 @@ cmap w!! w !sudo tee % >/dev/null
 
 " space to fold
 " nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-vnoremap <Space> zf
-nnoremap <Space> :w<cr>
+"
+vnoremap <silent> <Space> zf
+nnoremap <silent> <Space> :w<cr>
 
 set colorcolumn=80
 
@@ -261,7 +239,7 @@ inoremap <C-U> <C-G>u<C-U>
 if &t_Co > 2 || has("gui_running")
     set t_Co=256
     syntax on
-    set hlsearch
+    set nohlsearch
     inoremap <C-Space> <C-x><C-o>
     set cul
     hi CursorLine term=none cterm=none
@@ -289,6 +267,7 @@ augroup END
 
 " first attempt at vimscript, beware
 let s:colorschemes = [
+    \ 'default',
     \ 'mustang',
     \ '256_noir',
     \ 'smpl',
@@ -300,8 +279,7 @@ let s:colorschemes = [
     \ 'calmar256-light',
     \ 'blue',
     \ 'xoria256',
-    \ 'materialbox',
-    \ 'default']
+    \ 'materialbox']
 
 function! s:NextColor()
     if exists('g:colors_name')
@@ -361,11 +339,6 @@ command! -nargs=1 -complete=command Watch call s:Watch('<args>')
 autocmd BufWritePost * call s:RunWatch()
 
 augroup END
-
-
-if &diff
-    colorscheme mustang
-endif
 
 if $DISPLAY == ''
     let g:instant_markdown_autostart=0

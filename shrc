@@ -48,6 +48,8 @@ function gh () {
     git clone "https://github.com/lennart96/$1"
 }
 
+alias ll='git log --decorate=short --format=oneline --abbrev-commit --graph'
+
 # vim in shell
 
 alias q=clear
@@ -95,7 +97,15 @@ if [ -n "$ZSH_VERSION" ]; then
     # zsh
 
     setopt hist_ignore_space
+    setopt interactive_comments
+    setopt auto_pushd
+    setopt glob_complete
+    setopt append_history
+    setopt short_loops
+    setopt extended_history
+    setopt hist_expire_dups_first
     unsetopt autocd
+    unsetopt bg_nice
     setopt nomatch
     zstyle :compinstall filename '$HOME/.zshrc'
 
@@ -107,10 +117,11 @@ if [ -n "$ZSH_VERSION" ]; then
     compinit
 
     HISTFILE=$HOME/.zsh_history
-    SAVEHIST=${HISTSIZE}
+    export HISTSIZE=20000
+    export SAVEHIST=15000
 
     setopt vi
-    cdpath=( . ~/db ~/projects ~ /usr)
+    cdpath=( . ~/db ~/projects ~/Dropbox/uu ~ /usr)
 
     PROMPT='%(?.. -> %? 
 )%{%4F%}%2~%{%f%}'
@@ -152,3 +163,4 @@ elif [ -n "$BASH_VERSION" ]; then
     trap EC ERR
 fi
 
+. ~/adf2014.10/adfrc.sh
