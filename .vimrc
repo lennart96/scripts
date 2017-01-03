@@ -8,6 +8,7 @@ set nocompatible
 " inoremap <cr> <nop>
 " nnoremap jj <nop>
 " nnoremap kk <nop>
+nnoremap V <nop>
 
 filetype off
 
@@ -231,6 +232,7 @@ noremap <C-l> <C-w>l
 " formatting
 vmap Z gq
 nmap Z gqap
+set fo=tcq2n
 
 " undo C-U
 inoremap <C-U> <C-G>u<C-U>
@@ -267,19 +269,14 @@ augroup END
 
 " first attempt at vimscript, beware
 let s:colorschemes = [
-    \ 'default',
     \ 'mustang',
-    \ '256_noir',
-    \ 'smpl',
-    \ 'genericdc',
-    \ 'frozen',
-    \ 'C64',
+    \ 'default',
     \ 'genericdc-light',
+    \ 'genericdc',
     \ 'github',
     \ 'calmar256-light',
     \ 'blue',
-    \ 'xoria256',
-    \ 'materialbox']
+    \ 'xoria256']
 
 function! s:NextColor()
     if exists('g:colors_name')

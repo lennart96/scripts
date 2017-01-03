@@ -1,13 +1,20 @@
 unset SSH_ASKPASS
 
 export BROWSER=$(which luakit)
-export EDITOR=vim
+export EDITOR='emacsclient -a vim -nw'
 export PATH=$HOME/prefix/bin:$PATH
 export PATH=$HOME/android-sdk/platform-tools:$PATH
 export PATH=$HOME/android-sdk/tools:$PATH
 export PATH=$PATH:$HOME/.cabal/bin:/opt/clean/bin
 export PATH=$PATH:$HOME/anaconda3/bin
-export PATH=$PATH:"$PATH:/opt/tee-clc-11.0.0"
+export PATH="$PATH:/opt/tee-clc-11.0.0"
+export PATH="$PATH:~/.cargo/bin"
+export PATH="$PATH:/opt/android-sdk/platform-tools/"
+export PATH="/usr/local/heroku/bin:$PATH"
+
+export RUST_SRC_PATH="$HOME/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/"
+
+alias open=xdg-open
 
 function fb() {
     SETTERM=fbterm fbterm -n Terminus --font-size 14
@@ -16,6 +23,10 @@ function fb() {
 function bin_exists () {
     type $1 > /dev/null 2>&1 || return 1
     return 0
+}
+
+function brightness () {
+    sudo tee /sys/class/backlight/intel_backlight/brightness <<< $1
 }
 
 if bin_exists docker; then
@@ -29,7 +40,7 @@ if bin_exists pacman; then
     alias search='pacman -Ss'
 
     function binaries () {
-        pacman -Ql $1 | grep /usr/bin | awk '{print $2}' | cut -d'/' -f4
+        pacman -Ql $1 | grep /usr/bin | awk '$0=$2' | cut -d'/' -f4- | awk '$0'
     }
 elif bin_exists apt-get; then
     alias update='sudo apt-get update'
@@ -113,6 +124,7 @@ if [ -n "$ZSH_VERSION" ]; then
     promptinit
     prompt off
 
+    fpath+=~/.zfunc
     autoload -Uz compinit
     compinit
 
@@ -163,4 +175,4 @@ elif [ -n "$BASH_VERSION" ]; then
     trap EC ERR
 fi
 
-. ~/adf2014.10/adfrc.sh
+# . ~/adf2014.10/adfrc.sh
