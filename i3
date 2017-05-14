@@ -15,7 +15,7 @@ floating_modifier $mod
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Fira Mono 7
+font pango:Fira Code 8
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -23,37 +23,99 @@ font pango:Fira Mono 7
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+for_window [title="log-follow"] move container to workspace 9
+exec lxterminal -t log-follow -e journalctl --user -f
+exec lxterminal -t log-follow -e dmesg --follow -H
 
-exec_always sh -c 'sleep 10; xcape'
+for_window [class="Uzbl-core"] focus child, layout stacking, focus
+
+exec_always conky
+exec_always sh -c 'sleep 3; xcape'
 exec_always xrdb ~/.Xresources
 exec_always dropbox start
 exec_always volumeicon
-exec_always hp-systray
+# exec_always hp-systray
 exec_always nm-applet
+exec_always octopi-notifier
+exec_always sh -c 'sleep 3; blueberry-tray'
+exec_always emacs --daemon
 # exec_always setxkbmap -option 'caps:swapescape'
-exec_always setxkbmap -option 'ctrl:nocaps'
+exec_always setxkbmap -option 'ctrl:nocaps' -option 'altwin:swap_lalt_lwin' -option 'compose:ralt'
+exec_always gnome-screensaver
 exec_always nitrogen --restore
+exec --no-startup-id i3-msg 'workspace 9; exec /usr/bin/firefox; workspace 1'
 # exec_always compton -CGb -i 0.8 -m 0.85 -f -D 15
 # exec_always compton -CGb -o 0.75 -D 10 -m 1 -i 0.7 -e 0.8 --active-opacity 0.8
 exec_always compton -CGb -D 10 -m 1 --config ~/.compton
-exec ~/tmp/window-overlay/exe
+# exec i3-focus-debug
+exec sh -c 'sleep 5; xbacklighticon'
+default_orientation auto
+# hide_edge_borders smart
 
-new_window none
-new_float none
-for_window [class="^.*"] border none
-focus_follows_mouse no
+# for_window [title=""]/[class=""] floating enable
+# for_window [title=""]/[class=""] floating disable
+for_window [title="Nitrogen"] floating enable
+for_window [workspace="8"] floating enable
+for_window [class="Lxappearance"] floating enable
+
+#                       border  bg      text    indic     child
+# client.focused        #4c7899 #333333 #ffffff #2e9ef4   #285577
+# client.focused          #000000 #000000 #ffffff #000000   #000000
+# client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+# client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+# client.urgent           #2f343a #900000 #ffffff #900000   #900000
+# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+#                       border  bg      text    indic     child
+client.focused          #1c1c1c #1c1c1c #ffffff #1c1c1c #1c1c1c
+client.focused_inactive #1c1c1c #1c1c1c #aaaaaa #1c1c1c #1c1c1c
+client.unfocused        #1c1c1c #1c1c1c #777777 #1c1c1c #1c1c1c
+client.urgent           #1c1c1c #1c1c1c #ff0000 #1c1c1c #1c1c1c
+client.placeholder      #1c1c1c #1c1c1c #333333 #1c1c1c #1c1c1c
+
+gaps inner 8
+# smart_gaps on
+no_focus [class="^.*"]
+# new_window none
+# new_float none
+# for_window [class="^.*"] border none
+# focus_follows_mouse no
 
 bindsym $mod+z workspace back_and_forth
 bindsym $mod+Shift+z move container to workspace back_and_forth
+# bindsym $mod+Ctrl+j move container to workspace prev
+# bindsym $mod+Ctrl+k move container to workspace next
+# bindsym $mod+Ctrl+h workspace prev
+# bindsym $mod+Ctrl+l workspace next
+
+bindsym $mod+Ctrl+h resize shrink width 20 px or 20 ppt
+bindsym $mod+Ctrl+j resize grow height 20 px or 20 ppt
+bindsym $mod+Ctrl+k resize shrink height 20 px or 20 ppt
+bindsym $mod+Ctrl+l resize grow width 20 px or 20 ppt
+
+bindsym $mod+Ctrl+Shift+h resize shrink width 5 px or 5 ppt
+bindsym $mod+Ctrl+Shift+j resize grow height 5 px or 5 ppt
+bindsym $mod+Ctrl+Shift+k resize shrink height 5 px or 5 ppt
+bindsym $mod+Ctrl+Shift+l resize grow width 5 px or 5 ppt
 
 bindsym $mod+p exec thunar
-bindsym $mod+o exec luakit
-bindsym $mod+Return exec lxterminal
+bindsym $mod+o exec firefox
+bindsym $mod+i exec lxterminal -e math
+bindsym $mod+u exec galculator
+bindsym $mod+x exec ~/Dropbox/dropshot.sh
+# bindsym $mod+y exec xsel | xsel -i -b
+bindsym $mod+t exec xsel > ~/Dropbox/clipboard/$(date -In)
+bindsym $mod+semicolon exec ~/projects/articles/client-qml/client-qml
+bindsym $mod+Return exec konsole # xterm
+# bindsym $mod+backslash exec emacsclient -n -c -a emacs # -e '(eshell t)'
+bindsym $mod+backslash exec start-emacs
 
-bindsym $mod+w mode "resize"
+bindsym $mod+e mode "resize"
+bindsym $mod+w exec quickswitch
 
 bindsym $mod+f fullscreen
 bindsym $mod+q kill
+bindsym $mod+apostrophe exec gnome-screensaver-command -l
 
 bindsym $mod+r exec dmenu_run
 bindsym $mod+g exec --no-startup-id i3-dmenu-desktop
@@ -68,19 +130,21 @@ bindsym $mod+Shift+j move down 60 px
 bindsym $mod+Shift+k move up 60 px
 bindsym $mod+Shift+l move right 60 px
 
-bindsym $mod+v split v
-bindsym $mod+Shift+v split h
+bindsym $mod+d split v
+bindsym $mod+s split h
+bindsym $mod+Shift+d layout stacking
+bindsym $mod+Shift+s layout tabbed
 
-bindsym $mod+a layout toggle split
-bindsym $mod+d layout stacking
-bindsym $mod+s layout tabbed
+# bindsym $mod+a layout toggle split
+# bindsym $mod+v layout stacking
+# bindsym $mod+s layout tabbed
 
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+Shift+Return floating toggle
 
-#bindsym $mod+y focus parent
-#bindsym $mod+d focus child
+bindsym $mod+y focus parent
+bindsym $mod+a focus child
 
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -111,15 +175,15 @@ bindsym  $mod+Shift+q exec i3-msg exit
 
 mode "resize" {
 
-        bindsym h move left 30 px
-        bindsym j move down 30 px
-        bindsym k move up 30 px
-        bindsym l move right 30 px
+        bindsym Shift+h move left 30 px
+        bindsym Shift+j move down 30 px
+        bindsym Shift+k move up 30 px
+        bindsym Shift+l move right 30 px
 
-        bindsym Shift+h resize shrink width 30 px or 30 ppt
-        bindsym Shift+j resize grow height 30 px or 30 ppt
-        bindsym Shift+k resize shrink height 30 px or 30 ppt
-        bindsym Shift+l resize grow width 30 px or 30 ppt
+        bindsym h resize shrink width 20 px or 20 ppt
+        bindsym j resize grow height 20 px or 20 ppt
+        bindsym k resize shrink height 20 px or 20 ppt
+        bindsym l resize grow width 20 px or 20 ppt
 
         bindsym Control+h resize shrink width 5 px or 5 ppt
         bindsym Control+j resize grow height 5 px or 5 ppt
@@ -138,9 +202,13 @@ mode "resize" {
 
 bar {
         status_command i3status
-        position top
-        mode hide
-        hidden_state hide
-        modifier Mod4
-        font pango:Helvetica Neue 12
+        position bottom
+        # mode hide
+        # hidden_state hide
+        modifier $mod
+        # font pango:Fira Code 7
+        colors {
+               background #1c1c1c
+               statusline #cccccc
+        }
 }
