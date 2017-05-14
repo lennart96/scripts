@@ -1,6 +1,6 @@
 unset SSH_ASKPASS
 
-export BROWSER=$(which luakit)
+export BROWSER=$(which firefox)
 export EDITOR='emacsclient -a vim -nw'
 export PATH=$HOME/prefix/bin:$PATH
 export PATH=$HOME/android-sdk/platform-tools:$PATH
@@ -11,13 +11,25 @@ export PATH="$PATH:/opt/tee-clc-11.0.0"
 export PATH="$PATH:~/.cargo/bin"
 export PATH="$PATH:/opt/android-sdk/platform-tools/"
 export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="$PATH:/usr/local/sparky/bin"
+export PATH="$PATH:$HOME/go/bin"
 
 export RUST_SRC_PATH="$HOME/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/"
 
 alias open=xdg-open
+alias highlight='highlight -O ansi --syntax'
 
 function fb() {
     SETTERM=fbterm fbterm -n Terminus --font-size 14
+}
+
+function av() {
+    mkdir -p /tmp/av
+    fn="/tmp/av/$1.pnm"
+    convert "$1" "$fn"
+    shift
+    (aview $@ "$fn" &)
+    # i3-msg fullscreen
 }
 
 function bin_exists () {
@@ -26,7 +38,7 @@ function bin_exists () {
 }
 
 function brightness () {
-    sudo tee /sys/class/backlight/intel_backlight/brightness <<< $1
+    xrandr --output eDP1 --set Backlight ${1-110}
 }
 
 if bin_exists docker; then
@@ -115,6 +127,7 @@ if [ -n "$ZSH_VERSION" ]; then
     setopt short_loops
     setopt extended_history
     setopt hist_expire_dups_first
+    setopt cdable_vars
     unsetopt autocd
     unsetopt bg_nice
     setopt nomatch
@@ -136,7 +149,7 @@ if [ -n "$ZSH_VERSION" ]; then
     cdpath=( . ~/db ~/projects ~/Dropbox/uu ~ /usr)
 
     PROMPT='%(?.. -> %? 
-)%{%4F%}%2~%{%f%}'
+)%{%2F%}%2~%{%f%} '
     TIMEFMT='%J  -- %E (%U+%S %Mkb %c+%w)'
 
     function ctrlp() {
@@ -146,7 +159,14 @@ if [ -n "$ZSH_VERSION" ]; then
 
     zle -N ctrlp
 
+    function clear_() {
+        zle clear-screen
+    }
+
+    zle -N clear_
+
     bindkey '^P' ctrlp
+    bindkey '^L' clear_
     bindkey '^ ' list-choices
     bindkey '^n' menu-complete
     bindkey '^p' reverse-menu-complete
@@ -156,9 +176,9 @@ if [ -n "$ZSH_VERSION" ]; then
 
     if [ "x$SETTERM" != x ]
     then
-        export TERM="$SETTERM"
+        # export TERM="$SETTERM"
     else
-        export  TERM="linux"
+        # export  TERM="linux"
     fi
 
 
