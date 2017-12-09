@@ -15,7 +15,7 @@ floating_modifier $mod
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Fira Code 8
+font pango:Hasklig 8
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -23,32 +23,39 @@ font pango:Fira Code 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-for_window [title="log-follow"] move container to workspace 9
-exec lxterminal -t log-follow -e journalctl --user -f
-exec lxterminal -t log-follow -e dmesg --follow -H
+# for_window [title="log-follow — Konsole"] move container to workspace 10
+# exec --no-startup-id konsole -p LocalTabTitleFormat='log-follow' -e journalctl --user -f
+# exec --no-startup-id konsole -p LocalTabTitleFormat='log-follow' -e dmesg --follow -H
 
 for_window [class="Uzbl-core"] focus child, layout stacking, focus
 
-exec_always conky
-exec_always sh -c 'sleep 3; xcape'
-exec_always xrdb ~/.Xresources
-exec_always dropbox start
-exec_always volumeicon
+# popups_during_fullscreen smart
+floating_maximum_size 1280 x 768
+# shmlog on
+
+exec --no-startup-id dunst
+# exec --no-startup-id pwrnotify -d 60 -d 3600 80 50 25 10 5 4 3 2 1
+exec --no-startup-id unclutter -idle 5 -root
+exec --no-startup-id sh -c 'sleep 2; conky'
+exec --no-startup-id sh -c 'sleep 3; xcape'
+exec --no-startup-id xrdb ~/.Xresources
+exec --no-startup-id dropbox start
+exec --no-startup-id volumeicon
 # exec_always hp-systray
-exec_always nm-applet
-exec_always octopi-notifier
-exec_always sh -c 'sleep 3; blueberry-tray'
-exec_always emacs --daemon
+exec --no-startup-id nm-applet
+exec --no-startup-id sh -c 'sleep 3; blueberry-tray'
+exec --no-startup-id emacs --daemon
 # exec_always setxkbmap -option 'caps:swapescape'
-exec_always setxkbmap -option 'ctrl:nocaps' -option 'altwin:swap_lalt_lwin' -option 'compose:ralt'
-exec_always gnome-screensaver
-exec_always nitrogen --restore
-exec --no-startup-id i3-msg 'workspace 9; exec /usr/bin/firefox; workspace 1'
+exec --no-startup-id setxkbmap -option 'ctrl:nocaps' -option 'altwin:swap_lalt_lwin' -option 'compose:ralt'
+exec --no-startup-id gnome-screensaver
+# exec --no-startup-id gnome-calendar
+exec --no-startup-id nitrogen --restore
+# exec --no-startup-id i3-msg 'workspace 10; exec /usr/bin/firefox; workspace 1'
 # exec_always compton -CGb -i 0.8 -m 0.85 -f -D 15
 # exec_always compton -CGb -o 0.75 -D 10 -m 1 -i 0.7 -e 0.8 --active-opacity 0.8
-exec_always compton -CGb -D 10 -m 1 --config ~/.compton
+exec --no-startup-id compton -CGb -D 10 -m 1 --config ~/.compton
 # exec i3-focus-debug
-exec sh -c 'sleep 5; xbacklighticon'
+exec --no-startup-id sh -c 'sleep 5; xbacklighticon'
 default_orientation auto
 # hide_edge_borders smart
 
@@ -57,6 +64,7 @@ default_orientation auto
 for_window [title="Nitrogen"] floating enable
 for_window [workspace="8"] floating enable
 for_window [class="Lxappearance"] floating enable
+for_window [class="Inkscape" title="Properties"] floating enable
 
 #                       border  bg      text    indic     child
 # client.focused        #4c7899 #333333 #ffffff #2e9ef4   #285577
@@ -67,19 +75,23 @@ for_window [class="Lxappearance"] floating enable
 # client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 #                       border  bg      text    indic     child
-client.focused          #1c1c1c #1c1c1c #ffffff #1c1c1c #1c1c1c
+client.focused          #1c1c1c #1c1c1c #0099ff #1c1c1c #1c1c1c
 client.focused_inactive #1c1c1c #1c1c1c #aaaaaa #1c1c1c #1c1c1c
 client.unfocused        #1c1c1c #1c1c1c #777777 #1c1c1c #1c1c1c
 client.urgent           #1c1c1c #1c1c1c #ff0000 #1c1c1c #1c1c1c
 client.placeholder      #1c1c1c #1c1c1c #333333 #1c1c1c #1c1c1c
 
-gaps inner 8
-# smart_gaps on
+gaps inner 4
+gaps outer -4
+# smart_borders no_gaps
 no_focus [class="^.*"]
 # new_window none
 # new_float none
 # for_window [class="^.*"] border none
-# focus_follows_mouse no
+focus_follows_mouse no
+
+# bindsym $mod+m gtkman
+bindsym $mod+m exec --no-startup-id sh -c 'python /home/lennart/tmp/top10/main.py'
 
 bindsym $mod+z workspace back_and_forth
 bindsym $mod+Shift+z move container to workspace back_and_forth
@@ -98,26 +110,26 @@ bindsym $mod+Ctrl+Shift+j resize grow height 5 px or 5 ppt
 bindsym $mod+Ctrl+Shift+k resize shrink height 5 px or 5 ppt
 bindsym $mod+Ctrl+Shift+l resize grow width 5 px or 5 ppt
 
-bindsym $mod+p exec thunar
-bindsym $mod+o exec firefox
-bindsym $mod+i exec lxterminal -e math
-bindsym $mod+u exec galculator
-bindsym $mod+x exec ~/Dropbox/dropshot.sh
+bindsym $mod+p exec --no-startup-id thunar
+bindsym $mod+o exec --no-startup-id firefox
+bindsym $mod+i exec --no-startup-id lxterminal -e math
+bindsym $mod+u exec --no-startup-id galculator
+bindsym $mod+x exec --no-startup-id ~/Dropbox/dropshot.sh
 # bindsym $mod+y exec xsel | xsel -i -b
-bindsym $mod+t exec xsel > ~/Dropbox/clipboard/$(date -In)
-bindsym $mod+semicolon exec ~/projects/articles/client-qml/client-qml
-bindsym $mod+Return exec konsole # xterm
+bindsym $mod+t exec --no-startup-id xsel > ~/Dropbox/clipboard/$(date -In)
+bindsym $mod+semicolon exec --no-startup-id ~/projects/articles/client-qml/client-qml
+bindsym $mod+Return exec --no-startup-id konsole # xterm
 # bindsym $mod+backslash exec emacsclient -n -c -a emacs # -e '(eshell t)'
-bindsym $mod+backslash exec start-emacs
+bindsym $mod+backslash exec --no-startup-id start-emacs
 
 bindsym $mod+e mode "resize"
-bindsym $mod+w exec quickswitch
+bindsym $mod+w exec --no-startup-id quickswitch
 
 bindsym $mod+f fullscreen
 bindsym $mod+q kill
-bindsym $mod+apostrophe exec gnome-screensaver-command -l
+bindsym $mod+apostrophe exec --no-startup-id gnome-screensaver-command -l
 
-bindsym $mod+r exec dmenu_run
+bindsym $mod+r exec --no-startup-id dmenu_run
 bindsym $mod+g exec --no-startup-id i3-dmenu-desktop
 
 bindsym $mod+h focus left
@@ -171,7 +183,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+Shift+c reload
 #bindsym $mod+Shift+p restart
 #bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym  $mod+Shift+q exec i3-msg exit
+bindsym  $mod+Shift+q exec --no-startup-id i3-msg exit
 
 mode "resize" {
 
@@ -202,13 +214,25 @@ mode "resize" {
 
 bar {
         status_command i3status
+        i3bar_command i3bar -t
         position bottom
         # mode hide
         # hidden_state hide
+        # border #ffffff
         modifier $mod
-        # font pango:Fira Code 7
+        font pango:Hasklig 8
+        tray_padding 0
+        separator_symbol "     "
+        workspace_buttons yes
+        # strip_workspace_buttons yes
+        height 16
         colors {
-               background #1c1c1c
-               statusline #cccccc
+               background #1c1c1c00
+               statusline #ffffff
+               # statusline #cccccc
+               focused_workspace #ffffff44 #ffffff00 #ffffffaa
+               active_workspace #ffffff00 #ffffff00 #ffffffaa
+               inactive_workspace #ffffff00 #ffffff00 #ffffffaa
+               urgent_workspace #ffffff00 #ffffff00 #ff0000aa
         }
 }

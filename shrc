@@ -8,16 +8,22 @@ export PATH=$HOME/android-sdk/tools:$PATH
 export PATH=$PATH:$HOME/.cabal/bin:/opt/clean/bin
 export PATH=$PATH:$HOME/anaconda3/bin
 export PATH="$PATH:/opt/tee-clc-11.0.0"
-export PATH="$PATH:~/.cargo/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:/opt/android-sdk/platform-tools/"
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH:/usr/local/sparky/bin"
 export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:/home/lennart/Dropbox/elf64"
+export PATH="$PATH:/home/lennart/projects/bin"
 
 export RUST_SRC_PATH="$HOME/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/"
 
 alias open=xdg-open
 alias highlight='highlight -O ansi --syntax'
+alias thesaurus=aiksaurus
+alias connect_room='nmcli con up id "GNX962B5A 5GHz"'
+alias connect_eduroam='nmcli con up id eduroam'
+alias connect_atlantis='nmcli con up id Atlantis5'
 
 function fb() {
     SETTERM=fbterm fbterm -n Terminus --font-size 14
@@ -86,7 +92,7 @@ alias edit=:e
 alias m=make
 alias mr='clear;:r'
 
-alias ls='ls --time-style=+"%Y-%m-%d %H:%M" --color=auto --group-directories-first'
+alias ls='ls --time-style=+"%Y-%m-%d %H:%M" --color=auto --group-directories-first -t'
 alias grep='grep --color=auto'
 alias cgrep='grep --color=always'
 alias cls='ls --color=always'
@@ -146,7 +152,7 @@ if [ -n "$ZSH_VERSION" ]; then
     export SAVEHIST=15000
 
     setopt vi
-    cdpath=( . ~/db ~/projects ~/Dropbox/uu ~ /usr)
+    cdpath=( . ~/db ~/projects ~/Dropbox/uu ~ ~/Dropbox /usr)
 
     PROMPT='%(?.. -> %? 
 )%{%2F%}%2~%{%f%} '
@@ -196,3 +202,4 @@ elif [ -n "$BASH_VERSION" ]; then
 fi
 
 # . ~/adf2014.10/adfrc.sh
+
