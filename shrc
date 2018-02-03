@@ -22,6 +22,7 @@ alias open=xdg-open
 alias highlight='highlight -O ansi --syntax'
 alias thesaurus=aiksaurus
 alias connect_room='nmcli con up id "GNX962B5A 5GHz"'
+alias connect_phone='nmcli con up id Lennart'
 alias connect_eduroam='nmcli con up id eduroam'
 alias connect_atlantis='nmcli con up id Atlantis5'
 alias cal='cal -3 -m -w'
