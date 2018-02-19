@@ -155,7 +155,7 @@ if [ -n "$ZSH_VERSION" ]; then
     export SAVEHIST=15000
 
     setopt vi
-    cdpath=( . ~/db ~/projects ~/Dropbox/uu ~ ~/Dropbox /usr)
+    cdpath=( . ~/sub ~/projects ~/Dropbox/uu ~ ~/Dropbox /usr)
 
     PROMPT='%(?.. -> %? 
 )%{%2F%}%2~%{%f%} '
