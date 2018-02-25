@@ -114,8 +114,7 @@ bindsym $mod+p exec --no-startup-id thunar
 bindsym $mod+o exec --no-startup-id firefox
 bindsym $mod+i exec --no-startup-id lxterminal -e math
 bindsym $mod+u exec --no-startup-id galculator
-bindsym $mod+x exec --no-startup-id gnome-screenshot -a -c
-bindsym $mod+Shift+x exec --no-startup-id ~/Dropbox/dropshot.sh
+bindsym $mod+x exec --no-startup-id ~/Dropbox/dropshot.sh
 # bindsym $mod+y exec xsel | xsel -i -b
 bindsym $mod+t exec --no-startup-id xsel > ~/Dropbox/clipboard/$(date -In)
 bindsym $mod+semicolon exec --no-startup-id ~/projects/articles/client-qml/client-qml
