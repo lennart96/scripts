@@ -101,7 +101,7 @@ alias edit=:e
 alias m=make
 alias mr='clear;:r'
 
-alias ls='ls --time-style=+"%Y-%m-%d %H:%M" --color=auto --group-directories-first -t'
+alias ls='ls -F --time-style=+"%Y-%m-%d %H:%M" --color=auto --group-directories-first -t'
 alias grep='grep --color=auto'
 alias cgrep='grep --color=always'
 alias cls='ls --color=always'
