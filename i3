@@ -54,7 +54,7 @@ exec --no-startup-id nitrogen --restore
 # exec_always compton -CGb -i 0.8 -m 0.85 -f -D 15
 # exec_always compton -CGb -o 0.75 -D 10 -m 1 -i 0.7 -e 0.8 --active-opacity 0.8
 exec --no-startup-id compton -CGb -D 10 -m 1 --config ~/.compton
-# exec i3-focus-debug
+exec i3-focus
 exec --no-startup-id sh -c 'sleep 5; xbacklighticon'
 default_orientation auto
 # hide_edge_borders smart
