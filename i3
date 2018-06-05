@@ -28,6 +28,10 @@ font pango:Hasklig 8
 # exec --no-startup-id konsole -p LocalTabTitleFormat='log-follow' -e dmesg --follow -H
 
 for_window [class="Uzbl-core"] focus child, layout stacking, focus
+for_window [title="Figure 1"] floating enable
+for_window [title="Figure 2"] floating enable
+for_window [title="Figure 3"] floating enable
+for_window [title="Figure 4"] floating enable
 
 # popups_during_fullscreen smart
 floating_maximum_size 1280 x 768
