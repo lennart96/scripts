@@ -56,7 +56,7 @@ function bin_exists () {
 }
 
 function brightness () {
-    xrandr --output eDP1 --set Backlight ${1-110}
+    xrandr --output eDP1 --set Backlight ${1-187}
 }
 
 if bin_exists docker; then
