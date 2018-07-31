@@ -142,6 +142,7 @@ if [ -n "$ZSH_VERSION" ]; then
     setopt auto_pushd
     setopt glob_complete
     setopt append_history
+    setopt incappendhistorytime
     setopt short_loops
     setopt extended_history
     setopt hist_expire_dups_first
